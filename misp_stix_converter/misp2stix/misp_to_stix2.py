@@ -153,7 +153,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
                 'misp:tool="MISP-STIX-Converter"'
             ],
             'created_by_ref': self.__identity_id,
-            'interoperability': True
         }
         markings = self._handle_event_tags_and_galaxies()
         if markings:
@@ -318,7 +317,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'labels': self._create_labels(attribute),
             'kill_chain_phases': self._create_killchain(attribute['category']),
             'created_by_ref': self.__identity_id,
-            'interoperability': True
         }
         if indicator_args is not None:
             indicator_arguments.update(indicator_args)
@@ -346,7 +344,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'number_observed': 1,
             'created_by_ref': self.__identity_id,
             'allow_custom': True,
-            'interoperability': True
         }
         observable_args.update(self._handle_observable_time_fields(attribute))
         markings = self._handle_attribute_tags_and_galaxies(
@@ -410,7 +407,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'name': attribute['value'],
             'created_by_ref': self.__identity_id,
             'labels': self._create_labels(attribute),
-            'interoperability': True,
             'created': timestamp,
             'modified': timestamp
         }
@@ -437,7 +433,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'x_misp_value': attribute['value'],
             'x_misp_type': attribute['type'],
             'x_misp_category': attribute['category'],
-            'interoperability': True
         }
         if attribute.get('comment'):
             custom_args['x_misp_comment'] = attribute['comment']
@@ -707,7 +702,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'external_references': [self._get_vulnerability_references(attribute['value'])],
             'created_by_ref': self.__identity_id,
             'labels': self._create_labels(attribute),
-            'interoperability': True,
             'created': timestamp,
             'modified': timestamp
         }
@@ -794,7 +788,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
                 'created_by_ref': self.__identity_id,
                 'created': timestamp,
                 'modified': timestamp,
-                'interoperability': True
             }
         )
         if killchain:
@@ -824,7 +817,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'created_by_ref': self.__identity_id,
             'pattern': f'[{" AND ".join(pattern)}]',
             'allow_custom': True,
-            'interoperability': True
         }
         indicator_args.update(self._handle_indicator_time_fields(misp_object))
         if misp_object.get('comment'):
@@ -853,7 +845,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'number_observed': 1,
             'created_by_ref': self.__identity_id,
             'allow_custom': True,
-            'interoperability': True
         }
         observable_args.update(self._handle_observable_time_fields(misp_object))
         markings = self._handle_object_tags_and_galaxies(
@@ -1124,7 +1115,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'x_misp_attributes': [
                 self._parse_custom_object_attribute(attribute) for attribute in misp_object['Attribute']
             ],
-            'interoperability': True
         }
         if misp_object.get('comment'):
             custom_args['x_misp_comment'] = misp_object['comment']
@@ -2314,7 +2304,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
             'name': cluster['value'],
             'description': f"{description} | {cluster['description']}",
             'labels': self._create_galaxy_labels(name, cluster),
-            'interoperability': True
         }
         if timestamp is None:
             if not cluster.get('timestamp'):
@@ -2394,7 +2383,6 @@ class MISPtoSTIX2Parser(MISPtoSTIXParser):
                 to_ids=self._fetch_ids_flag(misp_object['Attribute'])
             ),
             'created_by_ref': self.__identity_id,
-            'interoperability': True,
             'identity_class': identity_class,
         }
         markings = self._handle_object_tags_and_galaxies(

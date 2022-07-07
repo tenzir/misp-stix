@@ -541,7 +541,6 @@ class MISPtoSTIX21Parser(MISPtoSTIX2Parser):
                 'kill_chain_phases': self._create_killchain(misp_object['meta-category']),
                 'created_by_ref': self.identity_id,
                 'allow_custom': True,
-                'interoperability': True
             }
         )
         indicator_args.update(self._handle_indicator_time_fields(misp_object))
@@ -596,7 +595,6 @@ class MISPtoSTIX21Parser(MISPtoSTIX2Parser):
             'labels': self._create_object_labels(misp_object, to_ids=to_ids),
             'object_refs': object_refs,
             'created_by_ref': self.identity_id,
-            'interoperability': True
         }
         markings = self._handle_object_tags_and_galaxies(
             misp_object,
@@ -838,7 +836,6 @@ class MISPtoSTIX21Parser(MISPtoSTIX2Parser):
                 to_ids=self._fetch_ids_flag(misp_object['Attribute'])
             ),
             'created_by_ref': self.identity_id,
-            'interoperability': True
         }
         if misp_object.get('comment'):
             location_args['description'] = misp_object['comment']
@@ -1264,7 +1261,6 @@ class MISPtoSTIX21Parser(MISPtoSTIX2Parser):
             'modified': timestamp,
             'name': orgname,
             'identity_class': 'organization',
-            'interoperability': True
         }
         return Identity(**identity_args)
 
